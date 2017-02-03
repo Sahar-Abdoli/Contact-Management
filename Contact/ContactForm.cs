@@ -33,22 +33,31 @@ namespace Contact
 				p1.Family = FamilyTextbox.Text;
 				p1.Email = EmailTextbox.Text;
 				p1.Phone = PhoneTextbox.Text;
-				oDatabaseContext.People.Add(p1);
-				oDatabaseContext.SaveChanges();
-
-				//Clear Grid For Call New Info
-				dataGridView.Rows.Clear();
-				dataGridView.Refresh();
-				NameTextbox.Text = string.Empty;
-				FamilyTextbox.Text = string.Empty;
-				PhoneTextbox.Text = string.Empty;
-				EmailTextbox.Text = string.Empty;
-				var contacts = oDatabaseContext.People.Where(current => current.Id != null).OrderBy(c => c.Name).ToList();
-				for (int i = 0; i < contacts.Count(); i++)
+				if (p1.Name == string.Empty)
 				{
-					//Add Row In Grid 
-					this.dataGridView.Rows.Add(contacts[i].Name, contacts[i].Family, contacts[i].Phone, contacts[i].Email, contacts[i].Id);
+					MessageBox.Show("Name Can not Be Empty");
 				}
+				else 
+				{
+					oDatabaseContext.People.Add(p1);
+					oDatabaseContext.SaveChanges();
+
+					//Clear Grid For Call New Info
+					dataGridView.Rows.Clear();
+					dataGridView.Refresh();
+					NameTextbox.Text = string.Empty;
+					FamilyTextbox.Text = string.Empty;
+					PhoneTextbox.Text = string.Empty;
+					EmailTextbox.Text = string.Empty;
+					var contacts = oDatabaseContext.People.Where(current => current.Id != null).OrderBy(c => c.Name).ToList();
+					for (int i = 0; i < contacts.Count(); i++)
+					{
+						//Add Row In Grid 
+						this.dataGridView.Rows.Add(contacts[i].Name, contacts[i].Family, contacts[i].Phone, contacts[i].Email, contacts[i].Id);
+					}
+
+				}
+				
 			}
 			catch(Exception ex)
 			{
@@ -83,21 +92,29 @@ namespace Contact
 				p1.Family = FamilyTextbox.Text;
 				p1.Email = EmailTextbox.Text;
 				p1.Phone = PhoneTextbox.Text;
-				oDatabaseContext.SaveChanges();
-
-				//Clear Grid For Call New Info
-				dataGridView.Rows.Clear();
-				dataGridView.Refresh();
-				NameTextbox.Text = string.Empty;
-				FamilyTextbox.Text = string.Empty;
-				PhoneTextbox.Text = string.Empty;
-				EmailTextbox.Text = string.Empty;
-				var contacts = oDatabaseContext.People.Where(current => current.Id != null).OrderBy(c => c.Name).ToList();
-				for (int i = 0; i < contacts.Count(); i++)
+				if (p1.Name == string.Empty)
 				{
-					//Add Row In Grid 
-					this.dataGridView.Rows.Add(contacts[i].Name, contacts[i].Family, contacts[i].Phone, contacts[i].Email, contacts[i].Id);
+					MessageBox.Show("Name Can not Be Empty");
 				}
+				else
+				{
+					oDatabaseContext.SaveChanges();
+
+					//Clear Grid For Call New Info
+					dataGridView.Rows.Clear();
+					dataGridView.Refresh();
+					NameTextbox.Text = string.Empty;
+					FamilyTextbox.Text = string.Empty;
+					PhoneTextbox.Text = string.Empty;
+					EmailTextbox.Text = string.Empty;
+					var contacts = oDatabaseContext.People.Where(current => current.Id != null).OrderBy(c => c.Name).ToList();
+					for (int i = 0; i < contacts.Count(); i++)
+					{
+						//Add Row In Grid 
+						this.dataGridView.Rows.Add(contacts[i].Name, contacts[i].Family, contacts[i].Phone, contacts[i].Email, contacts[i].Id);
+					}
+				}
+				
 			}
 			catch (Exception ex)
 			{
